@@ -9,11 +9,11 @@ class SubsciberService
     
     begin # Consume messages
       puts ' [*] Waiting for messages. To exit press CTRL+C'
-      queue.subscribe(block: true) do |_delivery_info, _properties, body|
+      queue.subscribe(manual_ack: true, block: true) do |_delivery_info, _properties, body|
         puts " [x] Consumed message: []"
-        puts _delivery_info
-        puts _properties
+        Order.create({product_id: 1, price: 2000, quantity: 1})
         puts body
+        channel.ack(_delivery_info.delivery_tag)
       end
     rescue Interrupt => _
       connection.close # Close the connection
