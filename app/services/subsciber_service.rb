@@ -11,7 +11,6 @@ class SubsciberService
       puts ' [*] Waiting for messages. To exit press CTRL+C'
       queue.subscribe(manual_ack: true, block: true) do |_delivery_info, _properties, body|
         puts " [x] Consumed message: []"
-        Order.create({product_id: 1, price: 2000, quantity: 1})
         puts body
         channel.ack(_delivery_info.delivery_tag)
       end

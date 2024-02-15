@@ -73,4 +73,14 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+  :user_name => 'apikey', # This is the string literal 'apikey', NOT the ID of your API key
+  :password => "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",
+  :domain => 'http://localhost:3000/',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
 end
