@@ -35,24 +35,48 @@ By default, Rabbit Mq will send any message without worry about number of messag
 <img width="574" alt="Screenshot 2024-02-16 at 09 25 43" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/e4187229-00a0-4ac9-929f-690e7e495746">
 
 <h1>Publish/ Subcribe</h1>
-This is one of the important topic In Rabbit Mq.There are four exchange types in Rabbit MQ: direct, faount, header, topic. In fanount exchange, all the consumer will be received exactly number of messages. That mean if the producer publish 2 messages each consumer will be received exactly 2 message. Please be noitce, when consumer subcribe for the channel, their queue will be clean. That mean they dont receive old message, they just receive new message.
+This is one of the important topics In Rabbit Mq. There are four exchange types in Rabbit MQ: direct, fanout, header, and topic. 
 
-This is basic setup for producer
+<h2>Fanout</h2>
+
+<img width="566" alt="Screenshot 2024-02-16 at 15 30 39" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/6d967ac6-5b28-4226-9fec-747f0abfcebd">
+
+In fanount exchange, all the consumers will receive exactly the number of messages. That means if the producer publishes 2 messages each consumer will receive exactly 2 messages. Please be aware, that when a consumer subscribes to the channel, their queue will be clean. That means they don't receive previous messages, they just receive new messages.
+
+This is the basic setup for the producer
 
 <img width="1070" alt="Screenshot 2024-02-16 at 09 50 03" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/0c075965-c3ad-4c89-9f16-fb6e65920372">
 
-This is basic setup for consumer
+This is the basic setup for consumer
 
 <img width="1066" alt="Screenshot 2024-02-16 at 09 50 39" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/64fa370d-35c6-4b73-9b40-7f505ee1d8e2">
 
 
-As you see in consumer we dont declare queue name, This queue will be generated random name. Last of not least exclusive option will delete consumer queue if they offline
+As you see in consumer we don't declare queue names, This queue will generate random names. Last of not least exclusive option will delete the consumer queue if they offline
 
 <img width="1169" alt="Screenshot 2024-02-16 at 09 46 04" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/a1be3b33-4a78-4ad0-9ff2-aa35389fa306">
 
+<h2>Direct</h2>
+
+Similar to the fanout exchange, all consumers will receive exactly the number of message that the producer send. However, by using direct we can determine a group of users can receive messages. You 
+may think you have to notify 10000 users. 5000 users register to receive messages by SMS other users only need to receive messages by email. By using direct exchange, you can send noti to all user and can specifically send an SMS queue for those registered SMS and an email queue for those registered emails<img width="563" alt="Screenshot 2024-02-16 at 15 42 05" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/93616747-ac26-4a17-850d-42914260e12f">
+.
+
+<img width="607" alt="Screenshot 2024-02-16 at 15 34 28" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/4417a304-5ff7-4032-bf25-3593ea9710b5">
+
+I have set for producer I will publish noti for SMS and email, if the user registers sms they will receive a message from sms queue, and so on
+
+<img width="942" alt="Screenshot 2024-02-16 at 15 59 30" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/b320b7fc-da12-409f-a34b-9a588638fa8a">
 
 
+I have defined 2 subscribers: one for sms and one for email
 
+<img width="958" alt="Screenshot 2024-02-16 at 15 59 49" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/08ca05d1-0ac1-4ecc-93f8-4ecf115d19b4">
+<img width="966" alt="Screenshot 2024-02-16 at 15 59 39" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/c3881cd7-ac26-4baa-99e2-9c4d358bf6e7">
 
+Now see the achievement
 
+<img width="1173" alt="Screenshot 2024-02-16 at 16 03 38" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/22b0dcde-fa45-44cc-8501-95e94b9fd61e">
+<img width="1173" alt="Screenshot 2024-02-16 at 16 03 29" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/eb7f4507-a5af-411d-868f-57c850727004">
+<img width="1178" alt="Screenshot 2024-02-16 at 16 03 20" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/64aeb385-3ee2-47af-836d-23f6f5f13af3">
 
