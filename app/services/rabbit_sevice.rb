@@ -30,4 +30,21 @@ class RabbitSevice
     exchange.publish(@message, routing_key: "sms")
     exchange.publish(@message, routing_key: "email")
   end
+
+  def topic_exchange
+    connection = Bunny.new("amqps://iecdgjsz:nOouVvT4l56VKVCuWOu43NmsFc34_I3L@cougar.rmq.cloudamqp.com/iecdgjsz")
+    connection.start # Start a connection with the CloudAMQP server
+    channel = connection.create_channel
+    exchange = channel.topic('topic_logs')
+    exchange.publish(@message, routing_key: "animal.monkey")
+    exchange.publish(@message, routing_key: "monkey.red")
+  end
+
+  def header_exchange
+    connection = Bunny.new("amqps://iecdgjsz:nOouVvT4l56VKVCuWOu43NmsFc34_I3L@cougar.rmq.cloudamqp.com/iecdgjsz")
+    connection.start # Start a connection with the CloudAMQP server
+    channel = connection.create_channel
+    exchange = channel.headers('example_exchange')
+    exchange.publish("8 cores/Linux", :headers => {"os" => "linux", "cores" => 8})
+  end
 end

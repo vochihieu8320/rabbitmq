@@ -76,4 +76,54 @@ class SubsciberService
       exit(0)
     end
   end
+
+  def animal_topic_subscriber
+    connection = Bunny.new("amqps://iecdgjsz:nOouVvT4l56VKVCuWOu43NmsFc34_I3L@cougar.rmq.cloudamqp.com/iecdgjsz")
+    connection.start  # Start a connection with the CloudAMQP server
+    channel = connection.create_channel # Declare a channel
+    exchange = channel.topic('topic_logs')
+    queue = channel.queue('', exclusive: true) # declare the queue
+    queue.bind(exchange, routing_key: "animal.*") # binding exchange
+    puts ' [*] Waiting for logs. To exit press CTRL+C'
+    begin
+      queue.subscribe(block: true) do |delivery_info, _properties, body|
+        puts " [x] #{delivery_info.routing_key}:#{body}"
+      end
+    rescue Interrupt => _
+      channel.close
+      connection.close
+      exit(0)
+    end
+  end
+
+  def monkey_topic_subscriber
+    connection = Bunny.new("amqps://iecdgjsz:nOouVvT4l56VKVCuWOu43NmsFc34_I3L@cougar.rmq.cloudamqp.com/iecdgjsz")
+    connection.start  # Start a connection with the CloudAMQP server
+    channel = connection.create_channel # Declare a channel
+    exchange = channel.topic('topic_logs')
+    queue = channel.queue('', exclusive: true) # declare the queue
+    queue.bind(exchange, routing_key: "monkey.*") # binding exchange
+    puts ' [*] Waiting for logs. To exit press CTRL+C'
+    begin
+      queue.subscribe(block: true) do |delivery_info, _properties, body|
+        puts " [x] #{delivery_info.routing_key}:#{body}"
+      end
+    rescue Interrupt => _
+      channel.close
+      connection.close
+      exit(0)
+    end
+  end
+
+  def header_subscriber
+    connection = Bunny.new("amqps://iecdgjsz:nOouVvT4l56VKVCuWOu43NmsFc34_I3L@cougar.rmq.cloudamqp.com/iecdgjsz")
+    connection.start  # Start a connection with the CloudAMQP server
+    channel = connection.create_channel # Declare a channel    
+    exchange = channel.headers('example_exchange')
+    queue = channel.queue('', exclusive: true) # declare the queue
+    q1 = queue.bind(exchange, :arguments => {"os" => "linux", "cores" => 8, "x-match" => "all"})
+    q1.subscribe do |delivery_info, properties, content|
+      puts "received #{content}"
+    end
+  end
 end
