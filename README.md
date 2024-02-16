@@ -69,7 +69,7 @@ I have set for producer I will publish noti for SMS and email, if the user regis
 <img width="942" alt="Screenshot 2024-02-16 at 15 59 30" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/b320b7fc-da12-409f-a34b-9a588638fa8a">
 
 
-I have defined 2 subscribers: one for sms and one for email
+I have defined 2 subscribers: one for SMS and one for email
 
 <img width="958" alt="Screenshot 2024-02-16 at 15 59 49" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/08ca05d1-0ac1-4ecc-93f8-4ecf115d19b4">
 <img width="966" alt="Screenshot 2024-02-16 at 15 59 39" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/c3881cd7-ac26-4baa-99e2-9c4d358bf6e7">
@@ -80,3 +80,19 @@ Now see the achievement
 <img width="1173" alt="Screenshot 2024-02-16 at 16 03 29" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/eb7f4507-a5af-411d-868f-57c850727004">
 <img width="1178" alt="Screenshot 2024-02-16 at 16 03 20" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/64aeb385-3ee2-47af-836d-23f6f5f13af3">
 
+
+<h2>Topic</h2>
+In direct exchange, instead of sending all messages like fanout exchange, we use direct exchange from that exchange only send messages for specific routing keys. Please consider you have notifications, users can pick what kind of information they want to receive notifications. For example, if they want to receive messages from pop music, you can easily use direct exchange with routing key pop But if they want more specific like only want to receive messages from Taylor Swift. How can we handle this, we can't create a queue for each singer. This topic exchange will handle it.
+
+There are 3 wildcards can use here: *,#. 
+<li>* only one word can be used after that</li>
+<li>* 0 or many word</li>
+For example:
+a.b* => only access a.b.c not a.b.c.d or a.b
+a.b# => access a.b or a.b.c.d
+<img width="636" alt="Screenshot 2024-02-16 at 17 18 04" src="https://github.com/vochihieu8320/rabbitmq/assets/51293321/8be104a0-058a-4ca9-87fa-e3f0f24a6cdc">
+
+
+<h2>Header exchange</h2>
+
+Similar to direct exchange but instead of routing key rabbit Mq use headers to match with all and any. If you use all settings, that means the consumer will match exactly producer header to receive and if you use any settings, that mean consumer will match any producer header. 
