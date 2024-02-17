@@ -1,3 +1,4 @@
+![Screenshot 2024-02-17 at 12 42 42](https://github.com/vochihieu8320/rabbitmq/assets/51293321/6b774d1f-7762-49a0-af49-073a98d2096b)
 <h1>What is Rabbit MQ</h1>
 Rabbit Mq is a message broker that transfers messages from producer to consumer. U can think of rabbit mq like post offices. All you need to do is send a letter to the post offices and the post offices
 will send it to the consumer
@@ -95,4 +96,8 @@ a.b# => access a.b or a.b.c.d
 
 <h2>Header exchange</h2>
 
-Similar to direct exchange but instead of routing key rabbit Mq use headers to match with all and any. If you use all settings, that means the consumer will match exactly producer header to receive and if you use any settings, that mean consumer will match any producer header. 
+Similar to direct exchange but instead of routing key rabbit Mq use headers to match with all and any. If you use all settings, that means the consumer will match exactly producer header to receive and if you use any settings, that means the consumer will match any producer header. 
+
+![Screenshot 2024-02-17 at 12 42 42](https://github.com/vochihieu8320/rabbitmq/assets/51293321/4c77ab3e-7ddf-4825-9182-49c74d93acaa)
+
+![Screenshot 2024-02-17 at 12 44 50](https://github.com/vochihieu8320/rabbitmq/assets/51293321/ba7c56a7-eece-4362-a917-f19a81a1204d)
